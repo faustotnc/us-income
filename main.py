@@ -6,12 +6,16 @@ import joblib
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import LabelEncoder
+from layout import get_wide_container
 
 # Page subsections
 from the_data_section.smote import show_smote_subsection
 from the_model_section.feature_importance import compute_feature_importance, show_average_feature_importance
 from the_model_section.confusion_matrix import show_confusion_matrix
 from the_model_section.cross_validation import show_cross_validation
+
+# Use the full page instead of a narrow central column
+st.set_page_config(layout="wide")
 
 
 @st.cache
@@ -79,20 +83,20 @@ feature_importance = compute_feature_importance(dataset, X_test, y_test, model)
 
 
 # ========================================== Streamlit View
-st.title("U.S. Income Prediction")
+get_wide_container().title("U.S. Income Prediction")
 
 # ======= THE DATA =======
-st.title("The Data 📊")
+get_wide_container().title("The Data 📊")
 show_smote_subsection(dataset, y)
 
 # ======= THE MODEL =======
-st.title("The Model 📑")
+get_wide_container().title("The Model 📦")
 
-show_cross_validation(X, y, model, (350, 300))
+show_cross_validation(X, y, model, 300)
 
 show_confusion_matrix(X_test, y_test, model, (350, 300))
 
 show_average_feature_importance(feature_importance)
 
 # ======= THE PREDICTIONS =======
-st.title("Predictions 🔮")
+get_wide_container().title("Predictions 🔮")
