@@ -1,3 +1,4 @@
+from matplotlib.pyplot import step
 import streamlit as st
 import pandas as pd
 import joblib
@@ -100,3 +101,25 @@ show_average_feature_importance(feature_importance)
 
 # ======= THE PREDICTIONS =======
 get_wide_container().title("Predictions 🔮")
+
+_, c1, c2, c3, c4, _ = st.columns((1, 1, 1, 1, 1, 1))
+
+# Column 1
+age = c1.slider('How old are you?', 0, 100, 25)
+sex = c1.selectbox('What is your sex?', raw_dataset.sex.unique())
+race = c1.selectbox('What is your race?', raw_dataset.race.unique())
+
+# Column 2
+gain = c2.number_input('What is your capital gain?', step=1)
+loss = c2.number_input('What is your capital loss?', step=1)
+education = c2.selectbox('What is your highest level of eduction?', raw_dataset.education.unique())
+
+# Column 3
+work_class = c3.selectbox('What is your work class?', raw_dataset['workclass'].unique())
+occupation = c3.selectbox('What is your occupation?', raw_dataset.occupation.unique())
+work = c3.number_input('How many hours per week do you work?', step=1)
+
+# Column 4
+marital = c4.selectbox('What is your marital status?', raw_dataset['marital-status'].unique())
+relationship = c4.selectbox('What is your relationship?', raw_dataset.relationship.unique())
+country = c4.selectbox('What is your native country?', raw_dataset['native-country'].unique())
