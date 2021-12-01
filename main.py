@@ -1,3 +1,4 @@
+!pip install joblib
 import altair as alt
 import streamlit as st
 import pandas as pd
