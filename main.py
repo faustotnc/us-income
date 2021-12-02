@@ -1,6 +1,6 @@
-
-import altair as alt
 import streamlit as st
+st.set_page_config(layout="wide")
+import altair as alt
 import pandas as pd
 import joblib
 import numpy as np
@@ -11,13 +11,14 @@ from layout import get_wide_container
 
 # Page subsections
 from the_data_section.smote import show_smote_subsection
+from the_data_section.circle_plot import make_data_circle_plot
 from the_model_section.feature_importance import compute_feature_importance, show_average_feature_importance
 from the_model_section.confusion_matrix import show_confusion_matrix
 from the_model_section.cross_validation import show_cross_validation
 from the_predictions_section.predictions_section import display_predictions_section
-
+from the_model_section.testing_st import show_subfeatures
 # Use the full page instead of a narrow central column
-st.set_page_config(layout="wide")
+
 
 
 @st.cache
@@ -89,6 +90,7 @@ get_wide_container().title("U.S. Income Prediction")
 
 # ======= THE DATA =======
 get_wide_container().title("The Data 📊")
+make_data_circle_plot()
 show_smote_subsection(dataset, y)
 
 # ======= THE MODEL =======
@@ -96,6 +98,7 @@ get_wide_container().title("The Model 📦")
 show_cross_validation(X, y, model, 300)
 show_confusion_matrix(X_test, y_test, model, (350, 300))
 show_average_feature_importance(feature_importance)
+show_subfeatures()
 
 # ======= THE PREDICTIONS =======
 get_wide_container().title("Predictions 🔮")
