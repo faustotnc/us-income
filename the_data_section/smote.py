@@ -19,11 +19,11 @@ def show_smote_subsection(dataset, y):
     # Show the dataset without SMOTE
     with col1:
         st.text("\nBefore oversampling:")
-        non_smote_data = dataset["income"].value_counts().rename(index={0: "<= 50K", 1: "> 50K"}).to_dict()
+        non_smote_data = dataset["income"].value_counts()
 
         non_smote_chart = alt.Chart(pd.DataFrame({
-            "Class Labels": non_smote_data.keys(),
-            "Number of Samples": non_smote_data.values(),
+            "Class Labels": ["<= 50k", "> 50k"],
+            "Number of Samples": [non_smote_data[0], non_smote_data[1]],
         })).mark_bar().encode(
             x=alt.X('Class Labels:N'),
             y='Number of Samples:Q',
@@ -37,11 +37,11 @@ def show_smote_subsection(dataset, y):
     # Show the dataset with SMOTE
     with col2:
         st.text("After oversampling:")
-        smote_data = pd.DataFrame(y, columns=["income"])["income"].value_counts().rename(index={0: "<= 50K", 1: "> 50K"}).to_dict()
+        smote_data = pd.DataFrame(y, columns=["income"])["income"].value_counts()
 
         smote_chart = alt.Chart(pd.DataFrame({
-            "Class Labels": smote_data.keys(),
-            "Number of Samples": smote_data.values(),
+            "Class Labels": ["<= 50k", "> 50k"],
+            "Number of Samples": [smote_data[0], smote_data[1]],
         })).mark_bar().encode(
             x=alt.X('Class Labels:N'),
             y='Number of Samples:Q',
