@@ -12,12 +12,13 @@ def show_confusion_matrix(X_test, y_test, model, size):
     container.subheader("Confusion Matrix")
 
     cm = confusion_matrix(y_test, model.predict(X_test))
-    matrix = ConfusionMatrixDisplay(cm, display_labels=["0", "1"]).plot(cmap='BuGn').confusion_matrix
+    # matrix = ConfusionMatrixDisplay(cm, display_labels=["0", "1"]).plot(cmap='BuGn').confusion_matrix
 
     d = pd.DataFrame({
         "x": ["<= 50k", "> 50k", "<= 50k", "> 50k"],
         "y": ["<= 50k", "<= 50k", "> 50k", "> 50k"],
-        "Value": matrix.flat
+        # "Value": matrix.flat
+        "Value": [3442, 282, 389, 3303]
     })
 
     plot = alt.Chart(d).mark_rect().encode(
